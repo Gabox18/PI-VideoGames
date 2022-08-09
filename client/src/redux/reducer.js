@@ -1,5 +1,5 @@
 import {GET_ALL_GAMES,FILTER_GENRES,FILTER_DB,DETAIL_GAMES,ORDER_GAMES_BY
-,GET_GENRES} from './actions'
+,GET_GENRES,CREATE_GAME} from './actions'
 
 import ordering from '../Ordenamiento_js/Ordenamiento';
 
@@ -54,6 +54,12 @@ const initialState = {
           ...state,
           games: ordering(auxAllGames, action.payload).map((e) => e),
         };
+
+      case CREATE_GAME :
+        return{
+          ...state,
+          games:[[action.payload],...state.gamesCopy]
+        }
 
       default:
         return { ...state };

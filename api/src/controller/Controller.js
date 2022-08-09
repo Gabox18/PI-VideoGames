@@ -8,27 +8,27 @@ const {data} = require('../../../client/data.js')
 
 
 const getGames = async () => { //obtiene los primeros 100 juegos
-//     let fullGames= []
-//     let response = await axios.get(`https://api.rawg.io/api/games?key=${API_KEY}`);
-//   if (response.data.results) {
-//     for(let i = 0; fullGames.length<100; i++){
-//         Games = response.data.results.map((game) => {
-//             return {
-//               id: game.id,
-//               name: game.name,
-//               background_image: game.background_image,
-//               rating : game.rating,
-//               genres: game.genres.map((g) => g.name),
-//             };
-//           });
-//           response = await axios.get(response.data.next)
-//           fullGames = [...fullGames,...Games]
-//     }
-//     let gameDB = await getGamesDB()
-//     fullGames = [...gameDB,...fullGames]
-//     return fullGames.slice(0,100);
-// }
-return data
+    let fullGames= []
+    let response = await axios.get(`https://api.rawg.io/api/games?key=${API_KEY}`);
+  if (response.data.results) {
+    for(let i = 0; fullGames.length<100; i++){
+        Games = response.data.results.map((game) => {
+            return {
+              id: game.id,
+              name: game.name,
+              background_image: game.background_image,
+              rating : game.rating,
+              genres: game.genres.map((g) => g.name),
+            };
+          });
+          response = await axios.get(response.data.next)
+          fullGames = [...fullGames,...Games]
+    }
+    let gameDB = await getGamesDB()
+    fullGames = [...gameDB,...fullGames]
+    return fullGames.slice(0,100);
+}
+//return data
 };
 
 const getSearchGame = async (nameGame) => { //busca por nombre
@@ -58,7 +58,7 @@ const getDetaills = async (id) =>{ //busca detalle por id
         description:response.data.description_raw,
         released: response.data.released,
         rating: response.data.rating,
-        platforms: response.data.platforms.map(p => p.platform.name),
+        platform: response.data.platforms.map(p => p.platform.name),
         genres : response.data.genres.map((g) =>{
             return{
                 name: g.name

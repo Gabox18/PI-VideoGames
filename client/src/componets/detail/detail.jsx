@@ -34,7 +34,7 @@ function Detail (props){
                 <p>{detailGame.rating}</p>
             </div>
             
-            {detailGame.platforms?.map((e, i)=>{
+            {detailGame.platform?.map((e, i)=>{
                 return(
                     <p key={i}>{e}</p>
                 )

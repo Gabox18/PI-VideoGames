@@ -6,6 +6,7 @@ export const FILTER_DB = 'FILTER_DB'
 export const DETAIL_GAMES = 'DETAIL_GAMES'
 export const ORDER_GAMES_BY = 'ORDER_GAMES_BY'
 export const GET_GENRES = 'GET_GENRES'
+export const CREATE_GAME = 'CREATE_GAME'
 
 
 export const getAllGames = () => {
@@ -34,6 +35,16 @@ export const getGenres = () => {
       let response = await axios.get(`http://localhost:3001/genres`)
       return dispatch({
         type: GET_GENRES,
+        payload: response.data
+      })
+  }
+}
+
+export const createGame = (objGame) => {
+  return async function(dispatch){
+      let response = await axios.post(`http://localhost:3001/videogames`,objGame)
+      return dispatch({
+        type: CREATE_GAME,
         payload: response.data
       })
   }
