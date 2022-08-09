@@ -35,10 +35,11 @@ const initialState = {
         };
 
       case FILTER_GENRES:
-        let genreFilter = auxAllGames.filter((e) => e.genres?.includes(action.payload));
         return {
           ...state,
-          games: genreFilter,
+          games: action.payload !=='Filtrar por'
+          ? auxAllGames.filter((e) => e.genres?.includes(action.payload))
+          : state.games
         };
 
       case FILTER_DB:
