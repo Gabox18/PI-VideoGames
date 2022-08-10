@@ -1,7 +1,7 @@
 import {GET_ALL_GAMES,FILTER_GENRES,FILTER_DB,DETAIL_GAMES,ORDER_GAMES_BY
 ,GET_GENRES,CREATE_GAME} from './actions'
 
-import ordering from '../Ordenamiento_js/Ordenamiento';
+import ordering from '../Funciones_js/Ordenamiento';
 
 const initialState = {
     games: [],
