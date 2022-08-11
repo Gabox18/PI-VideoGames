@@ -17,7 +17,7 @@ function ViewCreate (props){
                 background_image:""
             })
         }
-    },[])
+    },[props])
     return(
         <div>
             <h2>{props.name}</h2>

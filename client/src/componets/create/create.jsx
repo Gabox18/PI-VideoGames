@@ -54,7 +54,7 @@ function CreateGame(props){
        let error = validate(form)
        if(Object.keys(error).length === 0){
         setRenderDetails(true)
-        //dispatch(createGame(form));
+        dispatch(createGame(form));
        } else {
         alert('Completa los campos requeridos')
        } 
