@@ -5,19 +5,20 @@ _nc_cat=100&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=qVXZokCTiqsAX-lOWpd&_nc_ht=scontent-m
 mtrfMd3RAvfJ5vTz5fHZXQzEQ&oe=63079422`
 
 function ViewCreate (props){ 
+    let date = new Date();
+    let currentDate = date.toISOString().split('T')[0] //estado inicial de la fecha del equipo
     useEffect(()=>{
         return()=>{
             props.setForm({
                 name: "",
                 description:"",
-                //released:currentDate,
+                released:currentDate,
                 rating:0,
                 platform:[],
                 gender:[],
-                background_image:""
             })
         }
-    },[props])
+    },[currentDate, props])
     return(
         <div>
             <h2>{props.name}</h2>

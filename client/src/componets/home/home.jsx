@@ -31,8 +31,7 @@ function Home (props){
             setTimeout(()=>{
                 dispatch(getAllGames())
                 dispatch(getGenres())
-            },7000)
-            
+            },7000)  
         }
      
     },[dispatch, juegosActuales.length])

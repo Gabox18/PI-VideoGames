@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import {getGenres,createGame} from "../../redux/actions.js"
+import {getGenres,createGame,getAllGames} from "../../redux/actions.js"
 import validate from "../../Funciones_js/Validacion.js";
 import ViewCreate from "./ViewCreate.jsx";
  
@@ -14,6 +14,9 @@ function CreateGame(props){
     const genres = useSelector(state=>state.AllGenres)
     useEffect(()=>{
         dispatch(getGenres())
+        return()=>{
+            dispatch(getAllGames())
+        }
     // eslint-disable-next-line react-hooks/exhaustive-deps
     },[])
 //-----------------------------------------estados locales---------------------------------------------

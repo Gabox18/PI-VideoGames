@@ -76,11 +76,11 @@ const getDetaills = async (id) =>{ //busca detalle por id
  }
 
 const getGenres = async() => { // carga los generos en la DB
-    // let response = await axios.get(`https://api.rawg.io/api/genres?&key=${API_KEY}`)
-    // let generos = response.data.results.map(genre=>{
-    //      return genre.name
-    // })
-    // await createGenresDB(generos)
+    let response = await axios.get(`https://api.rawg.io/api/genres?&key=${API_KEY}`)
+    let generos = response.data.results.map(genre=>{
+         return genre.name
+    })
+    await createGenresDB(generos)
     const allGenres = await getGenresDB()
     return allGenres
 }

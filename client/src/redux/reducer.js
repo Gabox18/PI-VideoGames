@@ -57,8 +57,7 @@ const initialState = {
 
       case CREATE_GAME :
         return{
-          ...state,
-          games:[[action.payload],...state.gamesCopy]
+          ...state
         }
 
       default:

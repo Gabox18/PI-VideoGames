@@ -11,7 +11,6 @@ const createGenresDB = async(arrGenres)=>{
 
 const getGenresDB = async ()=> {
     let allGenres = await Genre.findAll()
-
     return allGenres.map(e=>e.name).toString().trim().split(',')
 }
 
