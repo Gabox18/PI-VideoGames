@@ -3,9 +3,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import {getGenres,createGame} from "../../redux/actions.js"
 import validate from "../../Funciones_js/Validacion.js";
+import ViewCreate from "./ViewCreate.jsx";
  
 function CreateGame(props){
-
+    
     let date = new Date();
     let currentDate = date.toISOString().split('T')[0] //estado inicial de la fecha del equipo
     const dispatch = useDispatch();
@@ -25,13 +26,22 @@ function CreateGame(props){
         gender:[],
     });
 
+    let [renderDetails,setRenderDetails] = useState(false) //la utilizo para hacer un renderizado condicional del componente <Detail/>
+
  //-----------------------------------funciones handles-----------------------------------------------------
     const handleInputChange = function(e) {
         if(e.target.name === "gender" || e.target.name === "platform"){
-            setForm({
-                ...form,
-                [e.target.name] : [...form[e.target.name],e.target.value]
-            })
+            if(e.target.checked){
+                setForm({
+                    ...form,
+                    [e.target.name] : [...form[e.target.name],e.target.value]
+                })
+            } else {
+                setForm({
+                    ...form,
+                    [e.target.name] : form[e.target.name].filter(element=>element!==e.target.value)
+                })
+            }
         } else {
             setForm({
             ...form,
@@ -43,26 +53,15 @@ function CreateGame(props){
        e.preventDefault();
        let error = validate(form)
        if(Object.keys(error).length === 0){
-        alert('Juego Creado Correctamente')
-        console.log(validate(form))
-        console.log(form)
+        setRenderDetails(true)
         //dispatch(createGame(form));
-        setForm({
-            name: "",
-            description:"",
-            released:currentDate,
-            rating:0,
-            platform:[],
-            gender:[],
-            background_image:""
-        })
        } else {
         alert('Completa los campos requeridos')
-       }
-       
+       } 
        
     }
     return(
+        renderDetails === false? 
         <div>
             <h2>Cargar Datos del Juego</h2>
             
@@ -111,9 +110,18 @@ function CreateGame(props){
                 <button type='submit' disabled={Object.keys(validate(form)).length === 0?false:true} onClick={(e)=>handleSubmit(e)}>Cargar Juego</button>
             </form>
 
-
             <Link to='/home'>inicio</Link>
         </div>
+
+        :<ViewCreate name={form.name}
+        background_image={form.background_image} 
+        genres={form.gender} 
+        platform={form.platform}
+        description={form.description}
+        rating = {form.rating}
+        setRenderDetails={setRenderDetails}//paso funcion que modifica el estado local del renderizado condicional
+        setForm={setForm}//paso la funcion que modifica el estado local del formulario para limpiarlo en el desmontado
+        />
     )
 }
 

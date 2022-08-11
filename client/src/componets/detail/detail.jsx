@@ -11,8 +11,6 @@ function Detail (props){
     useEffect(()=>{
         dispatch(gamesDetail(id))
     },[dispatch,id])
-    console.log(id)
-    console.log(detailGame)
     return(
         <div>
             <h2>{detailGame.name}</h2>
